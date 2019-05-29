@@ -20,10 +20,10 @@ void Game::start(){
     filepath = filepath + "/suelo.jpg";
     QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
     fondo->setPixmap(filepath);
+    scene->addItem(fondo);
 
-
-//    scene->addItem(fondo);
-      scene->addItem(fondo);
+    //->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 //    ui->graphicsView->setScene(scene);
 
