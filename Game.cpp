@@ -22,9 +22,6 @@ void Game::start(){
     fondo->setPixmap(filepath);
     scene->addItem(fondo);
 
-    //->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    //->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
 //    ui->graphicsView->setScene(scene);
 
 

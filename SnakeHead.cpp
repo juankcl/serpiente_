@@ -4,12 +4,17 @@
 #include "SnakeBody.h"
 #include "Game.h"
 #include <random>
+#include <QTimer>
 
 using namespace std;
 
 extern Game* game;
 
-SnakeHead::SnakeHead(QGraphicsItem *parent){
+SnakeHead::SnakeHead(QObject *parent,QGraphicsItem *parent){
+    //tiempo
+    QTimer * timer  = new QTimer();
+    connect(timer, SIGNAL(timeout()),this,SLOT(move()));
+    timer->start(50);
     // draw
     setRect(0,0,50,50);
     QBrush brush;
@@ -74,6 +79,15 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
 			teletransporte(cItems[i]);
         }
     }
+
+    if(event->key() == Qt::Key_Space){
+        prevPos = pos();
+        int xPos = x() + boundingRect().width();
+        int yPos = y();
+        setPos(xPos,yPos);
+        moveBodies();
+    }
+
 }
 
 void SnakeHead::elongate(){
@@ -117,7 +131,6 @@ void SnakeHead::teletransporte(QGraphicsItem *fruta)
 
 void SnakeHead::moveBodies(){
     // traverses through list of bodies and moves them properly
-
     // move all bodies from back to front
     for (size_t i = 0, n = snakeBodies.size()-1; i < n; ++i){
         snakeBodies[i]->setPos(snakeBodies[i+1]->pos());
@@ -125,4 +138,9 @@ void SnakeHead::moveBodies(){
 
     // move front body to previous position of head
     snakeBodies.last()->setPos(prevPos);
+}
+
+void SnakeHead::move()
+{
+    setPos(x(),y()+10);
 }

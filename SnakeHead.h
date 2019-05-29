@@ -8,11 +8,13 @@
 #include <QPointF>
 
 #include <QDebug>
+#include <QObject>
 
-class SnakeHead: public QGraphicsRectItem{
+class SnakeHead: public QObject, QGraphicsRectItem{
+    Q_OBJECT
 public:
     // constructors
-    SnakeHead(QGraphicsItem* parent=NULL);
+    SnakeHead(QObject *parent1=nullptr, QGraphicsItem *parent=nullptr);
 
     // events
     void keyPressEvent(QKeyEvent* event);
@@ -21,6 +23,8 @@ public:
     void elongate();
 	void teletransporte(QGraphicsItem *fruta);
     void moveBodies();
+ public slots:
+    void move();
 private:
     QList<SnakeBody*> snakeBodies;
     QPointF prevPos;
