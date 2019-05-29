@@ -14,7 +14,7 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
     //tiempo
     QTimer * timer  = new QTimer();
     connect(timer, SIGNAL(timeout()),this,SLOT(move()));
-    timer->start(50);
+    timer->start(150);
     // draw
     setRect(0,0,50,50);
     QBrush brush;
@@ -27,51 +27,56 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
 
     // TODO remove, test
     SnakeBody* b1 = new SnakeBody();
-    b1->setPos(0,50);
+    b1->setPos(50,0);
     game->scene->addItem(b1);
     snakeBodies.prepend(b1);
+    vida=true;
+    direccion = DOWN;
 
 }
-
 void SnakeHead::keyPressEvent(QKeyEvent *event){
     // move up
     if (event->key() == Qt::Key_Up){
-        direccion = UP;
-        prevPos = pos();
-        int xPos = x();
-        int yPos = y() - boundingRect().height();
-        setPos(xPos,yPos);
-        moveBodies();
+        if (direccion != DOWN)
+          direccion = UP;
+//        prevPos = pos();
+//        int xPos = x();
+//        int yPos = y() - boundingRect().height();
+//        setPos(xPos,yPos);
+//        moveBodies();
     }
 
     // move down
     if (event->key() == Qt::Key_Down){
+        if (direccion != UP)
         direccion = DOWN;
-        prevPos = pos();
-        int xPos = x();
-        int yPos = y() + boundingRect().height();
-        setPos(xPos,yPos);
-        moveBodies();
+//        prevPos = pos();
+//        int xPos = x();
+//        int yPos = y() + boundingRect().height();
+//        setPos(xPos,yPos);
+//        moveBodies();
     }
 
     // move right
     if (event->key() == Qt::Key_Right){
+        if (direccion != LEFT)
         direccion = RIGHT;
-        prevPos = pos();
-        int xPos = x() + boundingRect().width();
-        int yPos = y();
-        setPos(xPos,yPos);
-        moveBodies();
+//        prevPos = pos();
+//        int xPos = x() + boundingRect().width();
+//        int yPos = y();
+//        setPos(xPos,yPos);
+//        moveBodies();
     }
 
     // move left
     if (event->key() == Qt::Key_Left){
+        if (direccion != RIGHT)
         direccion = LEFT;
-        prevPos = pos();
-        int xPos = x() - boundingRect().width();
-        int yPos = y();
-        setPos(xPos,yPos);
-        moveBodies();
+//        prevPos = pos();
+//        int xPos = x() - boundingRect().width();
+//        int yPos = y();
+//        setPos(xPos,yPos);
+//        moveBodies();
     }
 
     // alargar si choca con fruta
@@ -91,6 +96,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
         setPos(xPos,yPos);
         moveBodies();
     }
+    qDebug()<< direccion;
 
 }
 
@@ -114,11 +120,17 @@ void SnakeHead::teletransporte(QGraphicsItem *fruta)
 		//Posicion random
 		random_device rd; // obtain a random number from hardware
 		mt19937 eng(rd()); // seed the generator
-		uniform_int_distribution<> distr(100, 600); // define the range
+        uniform_int_distribution<> distr(0, 15); // define the range
 
 		equix= distr(eng); // generate numbers
-		ye=distr(eng);
-		fruta->setPos(equix,ye);
+
+        random_device rdA; // obtain a random number from hardware
+        mt19937 engA(rdA()); // seed the generator
+        uniform_int_distribution<> distrA(0, 11); // define the range
+
+
+        ye=distrA(engA);
+        fruta->setPos(equix*50,ye*50);
 
 		//QDebug te deja imprimir dentro del ide de Qt como si fuera cout con motivos de debug
 		qDebug() << fruta->collidingItems().size() ;
@@ -146,6 +158,57 @@ void SnakeHead::moveBodies(){
 
 void SnakeHead::move()
 {
-    qDebug()<< direccion;
+    if (x()<0 || x()>800 || y()<0 || y()>600)
+        vida=false;
+
+    if(vida){
+    switch (direccion) {
+    case UP:{
+        prevPos = pos();
+        int xPos = x();
+        int yPos = y() - boundingRect().height();
+        setPos(xPos,yPos);
+        moveBodies();
+        break;
+    }
+    case DOWN:{
+        prevPos = pos();
+        int xPos = x();
+        int yPos = y() + boundingRect().height();
+        setPos(xPos,yPos);
+        moveBodies();
+        break;
+    }
+    case RIGHT:{
+        prevPos = pos();
+        int xPos = x() + boundingRect().width();
+        int yPos = y();
+        setPos(xPos,yPos);
+        moveBodies();
+        break;
+    }
+    case LEFT:{
+        prevPos = pos();
+        int xPos = x() - boundingRect().width();
+        int yPos = y();
+        setPos(xPos,yPos);
+        moveBodies();
+        break;
+    }
+
+    }
+    }
+    //alargar serpiente
+    QList<QGraphicsItem*> cItems = collidingItems();
+    for (size_t i = 0, n = cItems.size(); i < n; ++i){
+        if (typeid(*cItems[i]) == typeid(Fruit)){
+            // fruta encontrada en lista de colision
+            elongate();
+            teletransporte(cItems[i]);
+        }
+        else if (typeid(*cItems[i]) == typeid(SnakeBody))
+            vida=false;
+    }
+
    // setPos(x(),y()+10);
 }

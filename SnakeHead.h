@@ -31,6 +31,7 @@ private:
     QList<SnakeBody*> snakeBodies;
     QPointF prevPos;
     posicion direccion;
+    bool vida;
 };
 
 #endif // SNAKEHEAD_H
