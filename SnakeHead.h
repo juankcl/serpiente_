@@ -7,6 +7,8 @@
 #include <QList>
 #include <QPointF>
 
+#include <QDebug>
+
 class SnakeHead: public QGraphicsRectItem{
 public:
     // constructors
@@ -17,7 +19,7 @@ public:
 
     // public method
     void elongate();
-    void teletransporte();
+	void teletransporte(QGraphicsItem *fruta);
     void moveBodies();
 private:
     QList<SnakeBody*> snakeBodies;

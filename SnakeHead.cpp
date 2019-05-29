@@ -71,7 +71,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
         if (typeid(*cItems[i]) == typeid(Fruit)){
             // fruta encontrada en lista de colision
             elongate();
-            teletransporte();
+			teletransporte(cItems[i]);
         }
     }
 }
@@ -85,22 +85,33 @@ void SnakeHead::elongate(){
     body->setPos(-200,-200); // TODO
     game->scene->addItem(body);
 }
-void SnakeHead::teletransporte()
+void SnakeHead::teletransporte(QGraphicsItem *fruta)
 {
-    // agregar fruta
-    Fruit* f1 = new Fruit();
-    int equix,ye;
+	int equix,ye;
 
-    //posicion aleatoria de fruta
-    random_device rd; // obtain a random number from hardware
-    mt19937 eng(rd()); // seed the generator
-    uniform_int_distribution<> distr(100, 600); // define the range
+	bool exit = false;
 
-    equix= distr(eng); // generate numbers
-    ye=distr(eng);
+	//Ciclo para encontrar un lugar en donde poner la fruta
+	do{
+		//Posicion random
+		random_device rd; // obtain a random number from hardware
+		mt19937 eng(rd()); // seed the generator
+		uniform_int_distribution<> distr(100, 600); // define the range
 
-    f1->setPos(100,100);
-    //return f1;
+		equix= distr(eng); // generate numbers
+		ye=distr(eng);
+		fruta->setPos(equix,ye);
+
+		//QDebug te deja imprimir dentro del ide de Qt como si fuera cout con motivos de debug
+		qDebug() << fruta->collidingItems().size() ;
+
+		//Si la fruta no colisiona con nada, salir del ciclo
+		//(Si se agrega un fondo, probablemente se tiene que cambiar esta condicion a 1)
+		if (fruta->collidingItems().size() == 0)
+			exit = false;
+		else
+			exit = true;
+	}while (exit);
 }
 
 
