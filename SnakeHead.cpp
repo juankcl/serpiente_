@@ -99,7 +99,7 @@ void SnakeHead::teletransporte()
     equix= distr(eng); // generate numbers
     ye=distr(eng);
 
-    f1->setPos(equix,ye);
+    f1->setPos(100,100);
     //return f1;
 }
 
