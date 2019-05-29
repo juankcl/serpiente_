@@ -6,7 +6,6 @@
 class Fruit: public QGraphicsEllipseItem{
 public:
     Fruit(QGraphicsItem* parent=nullptr);
-    void teletransporte(Fruit * f1);
     //~Fruit();
 };
 

@@ -3,6 +3,9 @@
 #include "Fruit.h"
 #include "SnakeBody.h"
 #include "Game.h"
+#include <random>
+
+using namespace std;
 
 extern Game* game;
 
@@ -68,8 +71,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
         if (typeid(*cItems[i]) == typeid(Fruit)){
             // fruta encontrada en lista de colision
             elongate();
-            //teletransporte(typeid(Fruit));
-
+            teletransporte();
         }
     }
 }
@@ -83,6 +85,24 @@ void SnakeHead::elongate(){
     body->setPos(-200,-200); // TODO
     game->scene->addItem(body);
 }
+void SnakeHead::teletransporte()
+{
+    // agregar fruta
+    Fruit* f1 = new Fruit();
+    int equix,ye;
+
+    //posicion aleatoria de fruta
+    random_device rd; // obtain a random number from hardware
+    mt19937 eng(rd()); // seed the generator
+    uniform_int_distribution<> distr(100, 600); // define the range
+
+    equix= distr(eng); // generate numbers
+    ye=distr(eng);
+
+    f1->setPos(equix,ye);
+    //return f1;
+}
+
 
 void SnakeHead::moveBodies(){
     // traverses through list of bodies and moves them properly

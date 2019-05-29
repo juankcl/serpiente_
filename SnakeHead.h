@@ -17,6 +17,7 @@ public:
 
     // public method
     void elongate();
+    void teletransporte();
     void moveBodies();
 private:
     QList<SnakeBody*> snakeBodies;
