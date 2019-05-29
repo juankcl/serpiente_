@@ -3,6 +3,8 @@
 
 #include "SnakeBody.h"
 #include <QGraphicsRectItem>
+#include <QGraphicsTextItem>
+
 #include <QKeyEvent>
 #include <QList>
 #include <QPointF>
@@ -30,8 +32,12 @@ public:
 private:
     QList<SnakeBody*> snakeBodies;
     QPointF prevPos;
+
+    QGraphicsTextItem *gameover, *puntuacion;
+
     posicion direccion;
     bool vida;
+    int score;
 };
 
 #endif // SNAKEHEAD_H

@@ -5,6 +5,7 @@
 #include "Game.h"
 #include <random>
 #include <QTimer>
+#include <QGraphicsTextItem>
 
 using namespace std;
 
@@ -32,6 +33,15 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
     snakeBodies.prepend(b1);
     vida=true;
     direccion = DOWN;
+
+    puntuacion = new QGraphicsTextItem("Score: 0");
+    puntuacion->setFont(QFont("arial",25));
+    puntuacion->setDefaultTextColor(Qt::white);
+    puntuacion->setPos(10,10);
+    game->scene->addItem(puntuacion);
+
+    gameover = nullptr;
+    score = 0;
 
 }
 void SnakeHead::keyPressEvent(QKeyEvent *event){
@@ -137,7 +147,7 @@ void SnakeHead::teletransporte(QGraphicsItem *fruta)
 
 		//Si la fruta no colisiona con nada, salir del ciclo
 		//(Si se agrega un fondo, probablemente se tiene que cambiar esta condicion a 1)
-		if (fruta->collidingItems().size() == 0)
+        if (fruta->collidingItems().size() == 1)
 			exit = false;
 		else
 			exit = true;
@@ -162,42 +172,42 @@ void SnakeHead::move()
         vida=false;
 
     if(vida){
-    switch (direccion) {
-    case UP:{
-        prevPos = pos();
-        int xPos = x();
-        int yPos = y() - boundingRect().height();
-        setPos(xPos,yPos);
-        moveBodies();
-        break;
-    }
-    case DOWN:{
-        prevPos = pos();
-        int xPos = x();
-        int yPos = y() + boundingRect().height();
-        setPos(xPos,yPos);
-        moveBodies();
-        break;
-    }
-    case RIGHT:{
-        prevPos = pos();
-        int xPos = x() + boundingRect().width();
-        int yPos = y();
-        setPos(xPos,yPos);
-        moveBodies();
-        break;
-    }
-    case LEFT:{
-        prevPos = pos();
-        int xPos = x() - boundingRect().width();
-        int yPos = y();
-        setPos(xPos,yPos);
-        moveBodies();
-        break;
+        switch (direccion) {
+            case UP:{
+                prevPos = pos();
+                int xPos = x();
+                int yPos = y() - boundingRect().height();
+                setPos(xPos,yPos);
+                moveBodies();
+                break;
+            }
+            case DOWN:{
+                prevPos = pos();
+                int xPos = x();
+                int yPos = y() + boundingRect().height();
+                setPos(xPos,yPos);
+                moveBodies();
+                break;
+            }
+            case RIGHT:{
+                prevPos = pos();
+                int xPos = x() + boundingRect().width();
+                int yPos = y();
+                setPos(xPos,yPos);
+                moveBodies();
+                break;
+            }
+            case LEFT:{
+                prevPos = pos();
+                int xPos = x() - boundingRect().width();
+                int yPos = y();
+                setPos(xPos,yPos);
+                moveBodies();
+                break;
+            }
+        }
     }
 
-    }
-    }
     //alargar serpiente
     QList<QGraphicsItem*> cItems = collidingItems();
     for (size_t i = 0, n = cItems.size(); i < n; ++i){
@@ -205,9 +215,24 @@ void SnakeHead::move()
             // fruta encontrada en lista de colision
             elongate();
             teletransporte(cItems[i]);
+            score+=568;
+            puntuacion->setPlainText(QString("Score: " + QString::number(score)));
         }
+        //colision con su cuerpo
         else if (typeid(*cItems[i]) == typeid(SnakeBody))
             vida=false;
+    }
+
+    if (!vida)
+    {
+        if (gameover == nullptr)
+        {
+            gameover = new QGraphicsTextItem("GAME\nOVER!");
+            gameover->setFont(QFont("arial",150));
+            gameover->setDefaultTextColor(Qt::white);
+            gameover->setPos(50,50);
+            scene()->addItem(gameover);
+        }
     }
 
    // setPos(x(),y()+10);

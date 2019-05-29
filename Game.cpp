@@ -21,12 +21,12 @@ void Game::start(){
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
-    filepath = filepath + "/suelo.jpg";
+    filepath = filepath + "/suelo.png";
     QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
     fondo->setPixmap(filepath);
     scene->addItem(fondo);
 
-//    ui->graphicsView->setScene(scene);
+    //this->QgraphicsView->setScene(scene);
 
 
     // create snakeHead
