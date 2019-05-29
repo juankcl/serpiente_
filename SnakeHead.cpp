@@ -10,7 +10,7 @@ using namespace std;
 
 extern Game* game;
 
-SnakeHead::SnakeHead(QObject *parent,QGraphicsItem *parent){
+SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (parent){
     //tiempo
     QTimer * timer  = new QTimer();
     connect(timer, SIGNAL(timeout()),this,SLOT(move()));
@@ -142,5 +142,5 @@ void SnakeHead::moveBodies(){
 
 void SnakeHead::move()
 {
-    setPos(x(),y()+10);
+   // setPos(x(),y()+10);
 }

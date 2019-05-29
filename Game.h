@@ -4,6 +4,8 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 
+#include "SnakeHead.h"
+
 class Game: public QGraphicsView{
 public:
     // constructors

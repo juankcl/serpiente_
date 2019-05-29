@@ -10,11 +10,11 @@
 #include <QDebug>
 #include <QObject>
 
-class SnakeHead: public QObject, QGraphicsRectItem{
+class SnakeHead: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
     // constructors
-    SnakeHead(QObject *parent1=nullptr, QGraphicsItem *parent=nullptr);
+    SnakeHead(QGraphicsItem *parent=nullptr);
 
     // events
     void keyPressEvent(QKeyEvent* event);
