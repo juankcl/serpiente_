@@ -3,6 +3,7 @@
 #include "Fruit.h"
 #include <cstdlib>
 #include <random>
+#include <QCoreApplication>
 
 using namespace std;
 
@@ -15,13 +16,14 @@ Game::Game(QWidget *parent): QGraphicsView(parent){
 void Game::start(){
     //fondo
 
-//    QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
-//    filepath = filepath + "/suelo.jpg";
-//    QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
-//    fondo->setPixmap(filepath);
+    QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
+    filepath = filepath + "/suelo.jpg";
+    QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
+    fondo->setPixmap(filepath);
 
 
 //    scene->addItem(fondo);
+      scene->addItem(fondo);
 
 //    ui->graphicsView->setScene(scene);
 
