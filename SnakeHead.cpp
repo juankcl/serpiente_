@@ -68,7 +68,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
         if (typeid(*cItems[i]) == typeid(Fruit)){
             // fruta encontrada en lista de colision
             elongate();
-            //teletransporte();
+            //teletransporte(typeid(Fruit));
 
         }
     }
