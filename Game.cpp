@@ -13,6 +13,19 @@ Game::Game(QWidget *parent): QGraphicsView(parent){
 }
 
 void Game::start(){
+    //fondo
+
+//    QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
+//    filepath = filepath + "/suelo.jpg";
+//    QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
+//    fondo->setPixmap(filepath);
+
+
+//    scene->addItem(fondo);
+
+//    ui->graphicsView->setScene(scene);
+
+
     // create snakeHead
     SnakeHead* snakeHead = new SnakeHead();
     scene->addItem(snakeHead);

@@ -7,7 +7,7 @@
 class Game: public QGraphicsView{
 public:
     // constructors
-    Game(QWidget* parent=NULL);
+    Game(QWidget* parent=nullptr);
 
     // public methods
     void start();
