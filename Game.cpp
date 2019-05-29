@@ -16,6 +16,9 @@ Game::Game(QWidget *parent): QGraphicsView(parent){
 void Game::start(){
     //fondo
 
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
     filepath = filepath + "/suelo.jpg";
     QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
@@ -29,6 +32,8 @@ void Game::start(){
     SnakeHead* snakeHead = new SnakeHead();
     scene->addItem(snakeHead);
     snakeHead->setFocus();
+
+
 
     // agregar fruta
     Fruit* f1 = new Fruit();

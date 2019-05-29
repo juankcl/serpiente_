@@ -10,6 +10,8 @@
 #include <QDebug>
 #include <QObject>
 
+enum posicion{ UP, DOWN, LEFT, RIGHT};
+
 class SnakeHead: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
@@ -28,6 +30,7 @@ public:
 private:
     QList<SnakeBody*> snakeBodies;
     QPointF prevPos;
+    posicion direccion;
 };
 
 #endif // SNAKEHEAD_H

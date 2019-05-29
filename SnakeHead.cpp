@@ -36,6 +36,7 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
 void SnakeHead::keyPressEvent(QKeyEvent *event){
     // move up
     if (event->key() == Qt::Key_Up){
+        direccion = UP;
         prevPos = pos();
         int xPos = x();
         int yPos = y() - boundingRect().height();
@@ -45,6 +46,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
 
     // move down
     if (event->key() == Qt::Key_Down){
+        direccion = DOWN;
         prevPos = pos();
         int xPos = x();
         int yPos = y() + boundingRect().height();
@@ -54,6 +56,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
 
     // move right
     if (event->key() == Qt::Key_Right){
+        direccion = RIGHT;
         prevPos = pos();
         int xPos = x() + boundingRect().width();
         int yPos = y();
@@ -63,6 +66,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
 
     // move left
     if (event->key() == Qt::Key_Left){
+        direccion = LEFT;
         prevPos = pos();
         int xPos = x() - boundingRect().width();
         int yPos = y();
@@ -142,5 +146,6 @@ void SnakeHead::moveBodies(){
 
 void SnakeHead::move()
 {
+    qDebug()<< direccion;
    // setPos(x(),y()+10);
 }
