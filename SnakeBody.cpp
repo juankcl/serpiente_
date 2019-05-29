@@ -6,6 +6,6 @@ SnakeBody::SnakeBody(QGraphicsItem *parent){
     setRect(0,0,50,50);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
-    brush.setColor(Qt::cyan);
+    brush.setColor(Qt::darkGreen);
     setBrush(brush);
 }
