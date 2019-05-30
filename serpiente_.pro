@@ -30,14 +30,16 @@ SOURCES += \
         SnakeBody.cpp \
         SnakeHead.cpp \
         main.cpp \
-        menu.cpp
+        menu.cpp \
+        pared.cpp
 
 HEADERS += \
         Fruit.h \
         Game.h \
         SnakeBody.h \
         SnakeHead.h \
-        menu.h
+        menu.h \
+        pared.h
 
 FORMS += \
         menu.ui

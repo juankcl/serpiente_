@@ -2,6 +2,7 @@
 #include <QBrush>
 #include "Fruit.h"
 #include "SnakeBody.h"
+#include "pared.h"
 #include "Game.h"
 #include <random>
 #include <QTimer>
@@ -17,7 +18,7 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
     connect(timer, SIGNAL(timeout()),this,SLOT(move()));
     timer->start(150);
     // draw
-    setRect(0,0,50,50);
+    setRect(20,20,50,50);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
     brush.setColor(Qt::green);
@@ -107,6 +108,7 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
 //        int yPos = y();
 //        setPos(xPos,yPos);
 //        moveBodies();
+        //reinicio
         if(!vida){
             game->scene->clear();
             game->start();
@@ -226,6 +228,8 @@ void SnakeHead::move()
         }
         //colision con su cuerpo
         else if (typeid(*cItems[i]) == typeid(SnakeBody))
+            vida=false;
+        else if (typeid(*cItems[i]) == typeid(pared))
             vida=false;
     }
 

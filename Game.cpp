@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "SnakeHead.h"
 #include "Fruit.h"
+#include "pared.h"
 #include <cstdlib>
 #include <random>
 #include <QCoreApplication>
@@ -33,6 +34,25 @@ void Game::start(){
     SnakeHead* snakeHead = new SnakeHead();
     scene->addItem(snakeHead);
     snakeHead->setFocus();
+
+    //paredes
+    pared * muro = new pared ();
+    muro->setPos(-5,0);
+    scene->addItem(muro);
+
+    pared * muro1 = new pared ();
+    muro1->vertical();
+    muro1->setPos(0,-5);
+    scene->addItem(muro1);
+
+    pared * muro2 = new pared ();
+    muro2->vertical();
+    muro2->setPos(0,585);
+    scene->addItem(muro2);
+
+    pared * muro4 = new pared ();
+    muro4->setPos(785,0);
+    scene->addItem(muro4);
 
 
 
