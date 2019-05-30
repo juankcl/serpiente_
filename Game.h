@@ -13,6 +13,7 @@ public:
 
     // public methods
     void start();
+    void restart();
 
     // public attributes
     QGraphicsScene* scene;

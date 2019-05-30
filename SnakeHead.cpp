@@ -34,6 +34,7 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
     vida=true;
     direccion = DOWN;
 
+    //el marcador
     puntuacion = new QGraphicsTextItem("Score: 0");
     puntuacion->setFont(QFont("arial",25));
     puntuacion->setDefaultTextColor(Qt::white);
@@ -100,11 +101,16 @@ void SnakeHead::keyPressEvent(QKeyEvent *event){
     }
 
     if(event->key() == Qt::Key_Space){
-        prevPos = pos();
-        int xPos = x() + boundingRect().width();
-        int yPos = y();
-        setPos(xPos,yPos);
-        moveBodies();
+
+//        prevPos = pos();
+//        int xPos = x() + boundingRect().width();
+//        int yPos = y();
+//        setPos(xPos,yPos);
+//        moveBodies();
+        if(!vida){
+            game->scene->clear();
+            game->start();
+            }
     }
     qDebug()<< direccion;
 
@@ -215,7 +221,7 @@ void SnakeHead::move()
             // fruta encontrada en lista de colision
             elongate();
             teletransporte(cItems[i]);
-            score+=568;
+            score+=10;
             puntuacion->setPlainText(QString("Score: " + QString::number(score)));
         }
         //colision con su cuerpo
@@ -228,12 +234,18 @@ void SnakeHead::move()
         if (gameover == nullptr)
         {
             gameover = new QGraphicsTextItem("GAME\nOVER!");
-            gameover->setFont(QFont("arial",150));
-            gameover->setDefaultTextColor(Qt::white);
-            gameover->setPos(50,50);
+            gameover->setFont(QFont("arial",150,99));
+            gameover->setDefaultTextColor(Qt::red);
+            gameover->setPos(90,50);
             scene()->addItem(gameover);
+
+            //la instruccion de reiniciar
+            puntuacion = new QGraphicsTextItem("Press Space Bar to Restart");
+            puntuacion->setFont(QFont("Helvetica",20,99,true));
+            puntuacion->setDefaultTextColor(Qt::green);
+            puntuacion->setPos(230,500);
+            game->scene->addItem(puntuacion);
+
         }
     }
-
-   // setPos(x(),y()+10);
 }

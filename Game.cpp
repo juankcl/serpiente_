@@ -52,3 +52,25 @@ void Game::start(){
       f1->setPos(equix,ye);
       scene->addItem(f1);
 }
+
+void Game::restart(){
+//    //fondo
+
+//    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+//    QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
+//    filepath = filepath + "/suelo.png";
+//    QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
+//    fondo->setPixmap(filepath);
+//    scene->addItem(fondo);
+
+//    //this->QgraphicsView->setScene(scene);
+
+
+    // create snakeHead
+    SnakeHead* snakeHead = new SnakeHead();
+    scene->addItem(snakeHead);
+    snakeHead->setFocus();
+
+}

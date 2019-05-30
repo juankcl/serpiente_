@@ -13,6 +13,7 @@
 #include <QObject>
 
 enum posicion{ UP, DOWN, LEFT, RIGHT};
+enum color{ BLN, VERDE};
 
 class SnakeHead: public QObject, public QGraphicsRectItem{
     Q_OBJECT
@@ -33,7 +34,7 @@ private:
     QList<SnakeBody*> snakeBodies;
     QPointF prevPos;
 
-    QGraphicsTextItem *gameover, *puntuacion;
+    QGraphicsTextItem *gameover, *puntuacion, *instruccion_restart;
 
     posicion direccion;
     bool vida;
