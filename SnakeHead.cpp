@@ -121,7 +121,7 @@ void SnakeHead::teletransporte(QGraphicsItem *fruta)
 
         random_device rdA; 
         mt19937 engA(rdA());
-        uniform_int_distribution<> distrA(0, 11); 
+        uniform_int_distribution<> distrA(0, 12);
 
 
         	ye=distrA(engA); //generar numero para y
