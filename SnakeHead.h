@@ -13,23 +13,24 @@
 #include <QObject>
 
 enum posicion{ UP, DOWN, LEFT, RIGHT};
-enum color{ BLN, VERDE};
 
 class SnakeHead: public QObject, public QGraphicsRectItem{
     Q_OBJECT
 public:
-    // constructors
+    // constructores
     SnakeHead(QGraphicsItem *parent=nullptr);
 
-    // events
+    // eventos
     void keyPressEvent(QKeyEvent* event);
 
-    // public method
+    // metodos
     void elongate();
 	void teletransporte(QGraphicsItem *fruta);
     void moveBodies();
- public slots:
+	
+public slots:
     void move();
+	
 private:
     QList<SnakeBody*> snakeBodies;
     QPointF prevPos;
@@ -41,4 +42,4 @@ private:
     int score;
 };
 
-#endif // SNAKEHEAD_H
+#endif 
