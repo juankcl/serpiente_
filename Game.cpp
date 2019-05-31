@@ -9,7 +9,7 @@
 using namespace std;
 
 Game::Game(QWidget *parent): QGraphicsView(parent){
-    // set the scene
+    // colocar la escena de qt
     scene = new QGraphicsScene(0,0,800,600);
     this->setFixedSize(800,600);
     setScene(scene);
@@ -18,28 +18,25 @@ Game::Game(QWidget *parent): QGraphicsView(parent){
 void Game::start(){
     //fondo
 
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //anular la barra de desplazamiento horizontal de la ventana
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //anular la barra de desplazamiento vertical de la ventana
 
     QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
-    filepath = filepath + "/suelo.png";
+    filepath = filepath + "/suelo.png";                         //Añade a ruta la imagen de fondo
     QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
     fondo->setPixmap(filepath);
-    scene->addItem(fondo);
+    scene->addItem(fondo);                                      //añadir la imagen a la escena
 
-    //this->QgraphicsView->setScene(scene);
-
-
-    // create snakeHead
+    // crear snakeHead
     SnakeHead* snakeHead = new SnakeHead();
     scene->addItem(snakeHead);
     snakeHead->setFocus();
 
-    //paredes
+    //colocar las 4 paredes de la ventana
     pared * muro = new pared ();
     muro->setPos(-5,0);
     scene->addItem(muro);
-
+    
     pared * muro1 = new pared ();
     muro1->vertical();
     muro1->setPos(0,-5);
@@ -56,41 +53,27 @@ void Game::start(){
 
 
 
-    // agregar fruta
+    // agregar fruta con funcion rand de manera aleatoria
     Fruit* f1 = new Fruit();
     int equix,ye;
 
     //posicion aleatoria de fruta
-    random_device rd; // obtain a random number from hardware
-    mt19937 eng(rd()); // seed the generator
-    uniform_int_distribution<> distr(10, 500); // define the range
+    random_device rd; // obtener u numero random
+    mt19937 eng(rd()); 
+    uniform_int_distribution<> distr(10, 500); // definir el rango
 
-    equix= distr(eng); // generate numbers
+    equix= distr(eng); // generar los numeros
     ye=distr(eng);
 
 
       f1->setPos(equix,ye);
-      scene->addItem(f1);
+      scene->addItem(f1); //colocar fruta en escena
 }
 
+//funcion de reiniciar el juego
 void Game::restart(){
-//    //fondo
-
-//    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-//    QString filepath = QCoreApplication::applicationDirPath(); //carga ruta del ejecutable
-//    filepath = filepath + "/suelo.png";
-//    QGraphicsPixmapItem *fondo = new QGraphicsPixmapItem;
-//    fondo->setPixmap(filepath);
-//    scene->addItem(fondo);
-
-//    //this->QgraphicsView->setScene(scene);
-
-
-    // create snakeHead
+    // crear snakeHead
     SnakeHead* snakeHead = new SnakeHead();
     scene->addItem(snakeHead);
     snakeHead->setFocus();
-
 }
