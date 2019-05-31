@@ -9,7 +9,7 @@
 using namespace std;
 
 Fruit::Fruit(QGraphicsItem *parent){
-    // draw
+    // dibujar
     setRect(0,0,30,30);
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
