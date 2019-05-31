@@ -8,18 +8,15 @@
 
 class Game: public QGraphicsView{
 public:
-    // constructors
+    // constructores
     Game(QWidget* parent=nullptr);
 
-    // public methods
+    // metodos
     void start();
     void restart();
 
-    // public attributes
+    // atributos
     QGraphicsScene* scene;
-
-private:
-
 };
 
-#endif // GAME_H
+#endif
