@@ -10,4 +10,4 @@ public:
     void vertical();
 };
 
-#endif // PARED_H
+#endif 
