@@ -1,9 +1,9 @@
 #include <QApplication>
 #include "Game.h"
 
-Game* game;
+Game* game; //construir objeto juego
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) //inicio de juego
 {
     QApplication a(argc, argv);
 
