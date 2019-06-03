@@ -39,11 +39,11 @@ SnakeHead::SnakeHead(QGraphicsItem *parent): QObject (), QGraphicsRectItem (pare
     puntuacion->setFont(QFont("arial",25));	   
     puntuacion->setDefaultTextColor(Qt::white);
     puntuacion->setPos(10,10);			    //colocar en la esquina superior izq
-    game->scene->addItem(puntuacion);		    //añadir a la escena
+	puntuacion->setZValue(50);
+	game->scene->addItem(puntuacion);		    //añadir a la escena
 
     gameover = nullptr; //inicializar el objeto gameover
     score = 0; //iniciar la puntuacion en cero
-
 }
 
 //este evento define la direccion del movimiento del timer
